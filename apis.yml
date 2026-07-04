@@ -1,0 +1,167 @@
+aid: quartzy
+url: https://raw.githubusercontent.com/api-evangelist/quartzy/refs/heads/main/apis.yml
+name: Quartzy
+kind: company
+description: Quartzy is a lab management platform for life science teams that combines
+  inventory management, supply ordering, and procurement in one place. Labs track
+  every consumable, reagent, and piece of equipment, submit and approve order
+  requests, and buy from a catalog of millions of lab products. Quartzy exposes a
+  documented public REST API at api.quartzy.com so teams can create and update
+  inventory items and order requests from external systems - ELNs, LIMS, and
+  homegrown tools - and subscribe to webhooks for inventory and order-request
+  events. The API is authenticated with a per-user AccessToken (Access-Token
+  header) or OAuth2, and is available to all Quartzy accounts.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Lab Management
+- Inventory Management
+- Life Sciences
+- Procurement
+- Ordering
+- Laboratory
+- Webhooks
+created: '2026-07-04'
+modified: '2026-07-04'
+specificationVersion: '0.19'
+apis:
+- aid: quartzy:quartzy-inventory-items-api
+  name: Quartzy Inventory Items API
+  tags:
+  - Inventory
+  - Items
+  - Instances
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
+  properties:
+  - url: https://docs.quartzy.com/api/
+    type: Documentation
+  - url: https://docs.quartzy.com/api/
+    type: APIReference
+  - url: openapi/quartzy-openapi.yml
+    type: OpenAPI
+  - url: collections/quartzy.postman_collection.json
+    type: PostmanCollection
+  - url: collections/quartzy.opencollection.json
+    type: OpenCollection
+  description: List and filter inventory items in a lab, retrieve a single item with
+    its instances, and update the remaining quantity of an item instance. Items carry
+    type, vendor, catalog number, price, and location metadata; each item can have
+    one or more physical instances that are drawn down as the lab consumes stock.
+- aid: quartzy:quartzy-order-requests-api
+  name: Quartzy Order Requests API
+  tags:
+  - Order Requests
+  - Ordering
+  - Procurement
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
+  properties:
+  - url: https://docs.quartzy.com/api/
+    type: Documentation
+  - url: https://docs.quartzy.com/api/
+    type: APIReference
+  - url: openapi/quartzy-openapi.yml
+    type: OpenAPI
+  - url: collections/quartzy.postman_collection.json
+    type: PostmanCollection
+  - url: collections/quartzy.opencollection.json
+    type: OpenCollection
+  description: List and filter order requests for a lab, create new order requests
+    from an external system, retrieve a single request, and advance its status through
+    the Quartzy ordering workflow (new, approved, ordered, received, backordered).
+    This is the primary integration point for pushing procurement out of an ELN or
+    LIMS into Quartzy's ordering and approval flow.
+- aid: quartzy:quartzy-types-api
+  name: Quartzy Types API
+  tags:
+  - Types
+  - Categories
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
+  properties:
+  - url: https://docs.quartzy.com/api/
+    type: Documentation
+  - url: https://docs.quartzy.com/api/
+    type: APIReference
+  - url: openapi/quartzy-openapi.yml
+    type: OpenAPI
+  - url: collections/quartzy.postman_collection.json
+    type: PostmanCollection
+  - url: collections/quartzy.opencollection.json
+    type: OpenCollection
+  description: List and filter the item types (categories such as antibody, chemical,
+    enzyme, or equipment) defined for a lab. Types classify inventory items and order
+    requests and are referenced by their identifier when creating or updating those
+    resources.
+- aid: quartzy:quartzy-labs-api
+  name: Quartzy Labs API
+  tags:
+  - Labs
+  - Locations
+  - Organizations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
+  properties:
+  - url: https://docs.quartzy.com/api/
+    type: Documentation
+  - url: https://docs.quartzy.com/api/
+    type: APIReference
+  - url: openapi/quartzy-openapi.yml
+    type: OpenAPI
+  - url: collections/quartzy.postman_collection.json
+    type: PostmanCollection
+  - url: collections/quartzy.opencollection.json
+    type: OpenCollection
+  description: List the labs within an organization and retrieve a single lab. A lab
+    is the organizational and location scope that inventory items, order requests,
+    and types belong to; most inventory and ordering calls are filtered by lab_id.
+- aid: quartzy:quartzy-webhooks-api
+  name: Quartzy Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks
+  baseURL: https://api.quartzy.com
+  properties:
+  - url: https://docs.quartzy.com/api/
+    type: Documentation
+  - url: https://docs.quartzy.com/api/
+    type: APIReference
+  - url: openapi/quartzy-openapi.yml
+    type: OpenAPI
+  - url: collections/quartzy.postman_collection.json
+    type: PostmanCollection
+  - url: collections/quartzy.opencollection.json
+    type: OpenCollection
+  description: Register, list, retrieve, and enable or disable webhooks that Quartzy
+    calls when inventory items and order requests change. Webhooks let an external
+    system stay in sync with Quartzy without polling, receiving event payloads as
+    inventory is consumed and order requests move through the approval and ordering
+    workflow.
+common:
+- type: GitHubOrganization
+  url: https://github.com/quartzy
+- type: LinkedIn
+  url: https://www.linkedin.com/company/quartzy
+- type: Website
+  url: https://www.quartzy.com
+- type: Documentation
+  url: https://docs.quartzy.com/api/
+- type: Plans
+  url: plans/quartzy-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/quartzy-rate-limits.yml
+- type: FinOps
+  url: finops/quartzy-finops.yml
+- type: Support
+  url: https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

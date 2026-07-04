@@ -1,0 +1,104 @@
+aid: quartzy
+name: Quartzy
+review:
+  question: Does Quartzy expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-04'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Quartzy's public surface is a
+    request/response REST API at https://api.quartzy.com. The only server-push
+    mechanism Quartzy documents is outbound HTTP webhooks - Quartzy POSTs an
+    event payload to a URL the caller registers via /webhooks - which is
+    server-to-endpoint HTTP, not a WebSocket or SSE stream on Quartzy's own API.
+    There is no ws:// or wss:// endpoint to model, so no AsyncAPI document was
+    created.
+findings:
+  summary: |
+    Quartzy does not publish a documented public WebSocket API. Quartzy is a lab
+    management platform (inventory management, supply ordering, and procurement
+    for life science teams). It exposes a documented public REST API at
+    https://api.quartzy.com (reference at https://docs.quartzy.com/api/),
+    authenticated with a per-user AccessToken sent in the Access-Token header
+    (generated under Profile > Access Tokens) or via OAuth2. The API is
+    request/response over HTTPS and covers inventory items and their instances,
+    order requests, types, labs, the current user, and webhook registration.
+    Real-time notification is delivered through outbound HTTP webhooks that
+    Quartzy calls on inventory and order-request events - not through a
+    bidirectional or streaming WebSocket connection. No ws:// or wss:// endpoint
+    is documented anywhere in Quartzy's API reference as of the review date.
+  publicApi: |
+    The Quartzy Public API is generally available to accounts on Quartzy's paid
+    plans; API access and webhooks are bundled into the subscription with no
+    separate per-call fee. Endpoints, methods, and query parameters are grounded
+    in the public reference at docs.quartzy.com/api/. Confirmed resource paths
+    include /inventory-items, /inventory-items/{id},
+    /inventory-items/{itemId}/instances/{itemInstanceId}, /order-requests,
+    /order-requests/{id}, /types, /labs, /labs/{id}, /user, /healthz, and
+    /webhooks (plus /webhooks/{id}). Object field names in the OpenAPI are
+    modeled from Quartzy's documented resources and should be verified against
+    the live reference.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.quartzy.com
+      documented: true
+      note: Public API for inventory, order requests, types, labs, user, and webhooks. AccessToken header or OAuth2 auth.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Quartzy POSTs event payloads to a registered URL on inventory and order-request changes. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Quartzy's API reference as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.quartzy.com/healthz
+    - GET    https://api.quartzy.com/user
+    - GET    https://api.quartzy.com/labs
+    - GET    https://api.quartzy.com/labs/{id}
+    - GET    https://api.quartzy.com/types
+    - GET    https://api.quartzy.com/inventory-items
+    - GET    https://api.quartzy.com/inventory-items/{id}
+    - PUT    https://api.quartzy.com/inventory-items/{id}
+    - PUT    https://api.quartzy.com/inventory-items/{itemId}/instances/{itemInstanceId}
+    - GET    https://api.quartzy.com/order-requests
+    - POST   https://api.quartzy.com/order-requests
+    - GET    https://api.quartzy.com/order-requests/{id}
+    - PUT    https://api.quartzy.com/order-requests/{id}
+    - GET    https://api.quartzy.com/webhooks
+    - POST   https://api.quartzy.com/webhooks
+    - GET    https://api.quartzy.com/webhooks/{id}
+    - PUT    https://api.quartzy.com/webhooks/{id}
+  endpointsModeled:
+    - note: >-
+        HTTP methods, paths, and query parameters above are confirmed from the
+        public reference at docs.quartzy.com/api/. Request and response object
+        field names and the order-request status enumeration in the OpenAPI are
+        modeled from Quartzy's documented resources and example payloads;
+        verify exact field names before production use.
+sources:
+  - url: https://docs.quartzy.com/api/
+    type: APIReference
+    note: Public API reference - base URL api.quartzy.com, AccessToken/OAuth2 auth, all documented endpoints. All REST; no WebSocket mentioned.
+  - url: https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks
+    type: Documentation
+    note: Quartzy API and Webhooks overview - AccessToken in Access-Token header, create/update inventory items and order requests, webhooks for events.
+  - url: https://www.quartzy.com/pricing
+    type: Pricing
+    note: Subscription plans (Academia, Industry, Enterprise); API and webhooks included across plans.
+  - url: https://www.quartzy.com/tour/integrations
+    type: Documentation
+    note: Third-party integrations (QuickBooks, NetSuite, Slack, Teams, Google Sheets); the public API underpins custom integrations.
+  - url: https://github.com/quartzy
+    type: SourceCode
+    note: Quartzy GitHub organization. No official API spec or SDK repo published as of the review date.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Quartzy's own public API is
+    request/response REST, and its only push mechanism is outbound HTTP
+    webhooks. No AsyncAPI document was created because there is no server-push
+    WebSocket/SSE transport on Quartzy's own API to model.

@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quartzy Public API",
+    "version": "1.0",
+    "description": "Manage lab inventory and ordering with the Quartzy Public API. Base URL https://api.quartzy.com, authenticated with a per-user AccessToken in the Access-Token header or via OAuth2. Reference: https://docs.quartzy.com/api/"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "Access-Token",
+        "value": "{{accessToken}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Inventory Items", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List inventory items", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/inventory-items",
+            "params": [
+              { "name": "lab_id", "value": "", "type": "query", "description": "Filter inventory items to a specific lab." },
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for paginated results." }
+            ]
+          },
+          "docs": "Lists and filters inventory items, optionally scoped to a lab."
+        },
+        {
+          "info": { "name": "Retrieve an inventory item", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/inventory-items/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The inventory item identifier." } ]
+          },
+          "docs": "Retrieves a single inventory item, including its instances."
+        },
+        {
+          "info": { "name": "Update an inventory item quantity (deprecated)", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.quartzy.com/inventory-items/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The inventory item identifier." } ],
+            "body": { "type": "json", "data": "{\n  \"remaining_quantity\": 5\n}" }
+          },
+          "docs": "Deprecated. Updates the remaining quantity of an inventory item. Prefer updating a specific instance."
+        },
+        {
+          "info": { "name": "Update an item instance quantity", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.quartzy.com/inventory-items/:itemId/instances/:itemInstanceId",
+            "params": [
+              { "name": "itemId", "value": "", "type": "path", "description": "The inventory item identifier." },
+              { "name": "itemInstanceId", "value": "", "type": "path", "description": "The item instance identifier." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"remaining_quantity\": 3\n}" }
+          },
+          "docs": "Updates the remaining quantity of a specific instance of an inventory item."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Order Requests", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List order requests", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/order-requests",
+            "params": [
+              { "name": "lab_id", "value": "", "type": "query", "description": "Filter order requests to a specific lab." },
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for paginated results." }
+            ]
+          },
+          "docs": "Lists and filters order requests, optionally scoped to a lab."
+        },
+        {
+          "info": { "name": "Create an order request", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quartzy.com/order-requests",
+            "body": { "type": "json", "data": "{\n  \"lab_id\": \"\",\n  \"type_id\": \"\",\n  \"name\": \"Anti-GFP antibody\",\n  \"vendor_name\": \"Acme Bio\",\n  \"catalog_number\": \"AB-1234\",\n  \"quantity\": 1,\n  \"unit_size\": \"100 uL\"\n}" }
+          },
+          "docs": "Creates a new order request in a lab from an external system such as an ELN or LIMS."
+        },
+        {
+          "info": { "name": "Retrieve an order request", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/order-requests/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The order request identifier." } ]
+          },
+          "docs": "Retrieves a single order request by its identifier."
+        },
+        {
+          "info": { "name": "Update an order request status", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.quartzy.com/order-requests/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The order request identifier." } ],
+            "body": { "type": "json", "data": "{\n  \"status\": \"APPROVED\"\n}" }
+          },
+          "docs": "Advances an order request through the Quartzy ordering workflow by updating its status."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Types", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List types", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/types",
+            "params": [
+              { "name": "lab_id", "value": "", "type": "query", "description": "Filter types to a specific lab." },
+              { "name": "name", "value": "", "type": "query", "description": "Filter types by name." },
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for paginated results." }
+            ]
+          },
+          "docs": "Lists and filters the item types defined for a lab."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Labs", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List labs", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/labs",
+            "params": [
+              { "name": "organization_id", "value": "", "type": "query", "description": "Filter labs to a specific organization." },
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for paginated results." }
+            ]
+          },
+          "docs": "Lists the labs within an organization."
+        },
+        {
+          "info": { "name": "Retrieve a lab", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/labs/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The lab identifier." } ]
+          },
+          "docs": "Retrieves a single lab by its identifier."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List webhooks", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/webhooks",
+            "params": [
+              { "name": "organization_id", "value": "", "type": "query", "description": "Filter webhooks to a specific organization." },
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for paginated results." }
+            ]
+          },
+          "docs": "Lists the webhooks registered for an organization."
+        },
+        {
+          "info": { "name": "Create a webhook", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quartzy.com/webhooks",
+            "body": { "type": "json", "data": "{\n  \"organization_id\": \"\",\n  \"url\": \"https://example.com/quartzy/webhook\",\n  \"event\": \"order_request.updated\"\n}" }
+          },
+          "docs": "Registers a webhook that Quartzy calls when a subscribed event occurs."
+        },
+        {
+          "info": { "name": "Retrieve a webhook", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/webhooks/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The webhook identifier." } ]
+          },
+          "docs": "Retrieves a single webhook by its identifier."
+        },
+        {
+          "info": { "name": "Update a webhook", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.quartzy.com/webhooks/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The webhook identifier." } ],
+            "body": { "type": "json", "data": "{\n  \"is_enabled\": false\n}" }
+          },
+          "docs": "Updates a webhook, for example to enable or disable it."
+        }
+      ]
+    },
+    {
+      "info": { "name": "User", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve the current user", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.quartzy.com/user" },
+          "docs": "Returns information about the user that owns the AccessToken."
+        },
+        {
+          "info": { "name": "Service health check", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.quartzy.com/healthz" },
+          "docs": "Returns the health status of the Quartzy API service."
+        }
+      ]
+    }
+  ]
+}

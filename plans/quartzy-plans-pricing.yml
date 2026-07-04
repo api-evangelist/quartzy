@@ -1,0 +1,148 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Quartzy
+providerId: quartzy
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Lab Management
+- Inventory Management
+- Life Sciences
+- Procurement
+- Plans
+description: >-
+  Quartzy is sold as a lab management SaaS with tiered subscriptions priced per
+  plan and bundled user seats, plus shop credit toward Quartzy's product catalog.
+  Public plans observed at quartzy.com/pricing are Academia, Industry, and
+  Enterprise (custom). Quartzy's Public API and Webhooks are included across the
+  platform's plans - there is no separate API subscription or per-call fee - so
+  API access follows whichever subscription the organization holds. Quartzy is
+  historically known for free core inventory tracking; verify the current free /
+  trial availability and exact seat and credit inclusions on the live pricing
+  page during reconciliation.
+notes: >-
+  Prices below reflect quartzy.com/pricing as observed on 2026-07-04 (billed
+  annually) and may change. The API is not metered separately; it is available
+  to accounts on any paid plan. Enterprise pricing is custom. Confirm whether a
+  free tier or free trial is currently offered.
+sources:
+- https://www.quartzy.com/pricing
+- https://docs.quartzy.com/api/
+- https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks
+plans:
+- id: quartzy-academia
+  name: Academia
+  type: paid
+  description: >-
+    Entry plan aimed at academic research labs. Includes 3 user seats and $100
+    of shop credit toward the Quartzy product catalog, with inventory management,
+    order requests, and API/webhook access.
+  entries:
+  - label: Subscription
+    name: academia_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '50'
+    userMultiplied: false
+  - label: Included Users
+    name: academia_users
+    type: flat
+    metric: users
+    limit: 3
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Shop Credit
+    name: academia_shop_credit
+    type: flat
+    metric: credit
+    limit: 100
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Inventory Management
+  - name: Order Requests and Approvals
+  - name: Public API and Webhooks
+  - name: Product Catalog Access
+- id: quartzy-industry
+  name: Industry
+  type: paid
+  description: >-
+    Plan aimed at biotech and industry labs. Includes 5 user seats and $250 of
+    shop credit, with the full inventory and ordering feature set plus API and
+    webhook access.
+  entries:
+  - label: Subscription
+    name: industry_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '250'
+    userMultiplied: false
+  - label: Included Users
+    name: industry_users
+    type: flat
+    metric: users
+    limit: 5
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Shop Credit
+    name: industry_shop_credit
+    type: flat
+    metric: credit
+    limit: 250
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Inventory Management
+  - name: Order Requests and Approvals
+  - name: Public API and Webhooks
+  - name: Product Catalog Access
+  - name: Procurement Workflow
+- id: quartzy-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom plan for larger organizations with unlimited users, advanced
+    procurement, integrations, security review, and negotiated terms. Contact
+    Quartzy sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Unlimited Users
+  - name: Advanced Procurement and Integrations
+  - name: Public API and Webhooks
+  - name: SSO and Security Review
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

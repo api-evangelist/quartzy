@@ -1,0 +1,210 @@
+{
+  "info": {
+    "name": "Quartzy Public API",
+    "description": "Manage lab inventory and ordering with the Quartzy Public API. List and update inventory items and instances, create and advance order requests, read types and labs, inspect the current user, and register webhooks. Base URL: https://api.quartzy.com. Authenticate with a per-user AccessToken in the Access-Token header (generated under Profile > Access Tokens) or via OAuth2. Reference: https://docs.quartzy.com/api/",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Access-Token", "type": "string" },
+      { "key": "value", "value": "{{accessToken}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.quartzy.com", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Inventory Items",
+      "item": [
+        {
+          "name": "List inventory items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/inventory-items?lab_id=&page=1", "host": ["{{baseUrl}}"], "path": ["inventory-items"], "query": [ { "key": "lab_id", "value": "" }, { "key": "page", "value": "1" } ] },
+            "description": "Lists and filters inventory items, optionally scoped to a lab."
+          }
+        },
+        {
+          "name": "Retrieve an inventory item",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/inventory-items/:id", "host": ["{{baseUrl}}"], "path": ["inventory-items", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a single inventory item, including its instances."
+          }
+        },
+        {
+          "name": "Update an inventory item quantity (deprecated)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"remaining_quantity\": 5\n}" },
+            "url": { "raw": "{{baseUrl}}/inventory-items/:id", "host": ["{{baseUrl}}"], "path": ["inventory-items", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Deprecated. Updates the remaining quantity of an inventory item. Prefer updating a specific instance."
+          }
+        },
+        {
+          "name": "Update an item instance quantity",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"remaining_quantity\": 3\n}" },
+            "url": { "raw": "{{baseUrl}}/inventory-items/:itemId/instances/:itemInstanceId", "host": ["{{baseUrl}}"], "path": ["inventory-items", ":itemId", "instances", ":itemInstanceId"], "variable": [ { "key": "itemId", "value": "" }, { "key": "itemInstanceId", "value": "" } ] },
+            "description": "Updates the remaining quantity of a specific instance of an inventory item."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Requests",
+      "item": [
+        {
+          "name": "List order requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/order-requests?lab_id=&page=1", "host": ["{{baseUrl}}"], "path": ["order-requests"], "query": [ { "key": "lab_id", "value": "" }, { "key": "page", "value": "1" } ] },
+            "description": "Lists and filters order requests, optionally scoped to a lab."
+          }
+        },
+        {
+          "name": "Create an order request",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"lab_id\": \"\",\n  \"type_id\": \"\",\n  \"name\": \"Anti-GFP antibody\",\n  \"vendor_name\": \"Acme Bio\",\n  \"catalog_number\": \"AB-1234\",\n  \"quantity\": 1,\n  \"unit_size\": \"100 uL\"\n}" },
+            "url": { "raw": "{{baseUrl}}/order-requests", "host": ["{{baseUrl}}"], "path": ["order-requests"] },
+            "description": "Creates a new order request in a lab from an external system such as an ELN or LIMS."
+          }
+        },
+        {
+          "name": "Retrieve an order request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/order-requests/:id", "host": ["{{baseUrl}}"], "path": ["order-requests", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a single order request by its identifier."
+          }
+        },
+        {
+          "name": "Update an order request status",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"APPROVED\"\n}" },
+            "url": { "raw": "{{baseUrl}}/order-requests/:id", "host": ["{{baseUrl}}"], "path": ["order-requests", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Advances an order request through the Quartzy ordering workflow by updating its status."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Types",
+      "item": [
+        {
+          "name": "List types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/types?lab_id=&name=&page=1", "host": ["{{baseUrl}}"], "path": ["types"], "query": [ { "key": "lab_id", "value": "" }, { "key": "name", "value": "" }, { "key": "page", "value": "1" } ] },
+            "description": "Lists and filters the item types defined for a lab."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Labs",
+      "item": [
+        {
+          "name": "List labs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/labs?organization_id=&page=1", "host": ["{{baseUrl}}"], "path": ["labs"], "query": [ { "key": "organization_id", "value": "" }, { "key": "page", "value": "1" } ] },
+            "description": "Lists the labs within an organization."
+          }
+        },
+        {
+          "name": "Retrieve a lab",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/labs/:id", "host": ["{{baseUrl}}"], "path": ["labs", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a single lab by its identifier."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "List webhooks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/webhooks?organization_id=&page=1", "host": ["{{baseUrl}}"], "path": ["webhooks"], "query": [ { "key": "organization_id", "value": "" }, { "key": "page", "value": "1" } ] },
+            "description": "Lists the webhooks registered for an organization."
+          }
+        },
+        {
+          "name": "Create a webhook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"organization_id\": \"\",\n  \"url\": \"https://example.com/quartzy/webhook\",\n  \"event\": \"order_request.updated\"\n}" },
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": ["{{baseUrl}}"], "path": ["webhooks"] },
+            "description": "Registers a webhook that Quartzy calls when a subscribed event occurs."
+          }
+        },
+        {
+          "name": "Retrieve a webhook",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/webhooks/:id", "host": ["{{baseUrl}}"], "path": ["webhooks", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a single webhook by its identifier."
+          }
+        },
+        {
+          "name": "Update a webhook",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"is_enabled\": false\n}" },
+            "url": { "raw": "{{baseUrl}}/webhooks/:id", "host": ["{{baseUrl}}"], "path": ["webhooks", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Updates a webhook, for example to enable or disable it."
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Retrieve the current user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/user", "host": ["{{baseUrl}}"], "path": ["user"] },
+            "description": "Returns information about the user that owns the AccessToken."
+          }
+        },
+        {
+          "name": "Service health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/healthz", "host": ["{{baseUrl}}"], "path": ["healthz"] },
+            "description": "Returns the health status of the Quartzy API service."
+          }
+        }
+      ]
+    }
+  ]
+}

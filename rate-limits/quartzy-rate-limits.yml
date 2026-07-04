@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Quartzy
+providerId: quartzy
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Lab Management
+- Inventory Management
+- Life Sciences
+- Rate Limiting
+- Quotas
+description: >-
+  Quartzy does not publish fixed numeric rate limits for its Public API in the
+  developer reference. The API is authenticated per user with an AccessToken (or
+  OAuth2), and access is scoped to the labs and organizations the token's user
+  belongs to; that authorization scope, rather than a documented per-minute
+  request cap, is the primary governor on what a caller can read and write. List
+  endpoints are paginated with a page query parameter, which bounds response
+  size. Callers should assume standard SaaS abuse protection may throttle
+  excessive traffic and should implement retry-with-backoff on 429 responses.
+notes: >-
+  No numeric per-account or per-endpoint request limits are documented as of the
+  review date. Verify any current limits with Quartzy support
+  (support@quartzy.com) and against the live reference at docs.quartzy.com/api/
+  during reconciliation.
+sources:
+- https://docs.quartzy.com/api/
+- https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks
+responseCodes:
+  throttled: 429
+limits:
+- name: Public API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Public API.
+- name: Authorization Scope
+  scope: user
+  metric: resources
+  limit: token user's labs and organizations
+  notes: An AccessToken can only act on the labs and organizations its user can access.
+- name: Pagination
+  scope: request
+  metric: items
+  limit: per page
+  notes: List endpoints page results via the page query parameter.
+policies:
+- name: Backoff Strategy
+  description: On a 429 or 5xx response, retry with exponential backoff and jitter and honor any Retry-After header.
+- name: Pagination
+  description: Iterate large collections with the page parameter rather than requesting everything at once.
+- name: Webhooks Over Polling
+  description: Prefer registering webhooks for inventory and order-request changes instead of frequently polling list endpoints.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,751 @@
+openapi: 3.0.3
+info:
+  title: Quartzy Public API
+  description: >-
+    The Quartzy Public API lets life science teams manage lab inventory and
+    ordering programmatically. With it you can list and update inventory items
+    and their instances, create and advance order requests, read item types and
+    labs, inspect the current user, and register webhooks for inventory and
+    order-request events. The API is generally available to all Quartzy accounts.
+
+    Base URL: https://api.quartzy.com. Requests are authenticated with a
+    per-user AccessToken passed in the `Access-Token` header (generated in
+    Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON.
+    List endpoints are paginated with a `page` query parameter.
+
+    Endpoint paths, methods, and query parameters in this document are grounded
+    in the public reference at https://docs.quartzy.com/api/. Request and
+    response object fields are modeled from Quartzy's documented resources and
+    example payloads; verify exact field names and enumerations against the live
+    reference before relying on them in production.
+  version: '1.0'
+  contact:
+    name: Quartzy Support
+    url: https://docs.quartzy.com/api/
+    email: support@quartzy.com
+  x-endpointsConfirmed: true
+  x-endpointsModeled: true
+servers:
+  - url: https://api.quartzy.com
+    description: Quartzy Public API
+security:
+  - accessToken: []
+  - oauth2: []
+tags:
+  - name: Inventory Items
+    description: Lab inventory items and their physical instances.
+  - name: Order Requests
+    description: Procurement requests moving through Quartzy's ordering workflow.
+  - name: Types
+    description: Item type categories used to classify inventory and requests.
+  - name: Labs
+    description: Labs within an organization; the scope for inventory and ordering.
+  - name: Webhooks
+    description: Event subscriptions for inventory and order-request changes.
+  - name: User
+    description: The authenticated user and service health.
+paths:
+  /healthz:
+    get:
+      operationId: getHealth
+      tags:
+        - User
+      summary: Service health check
+      description: Returns the health status of the Quartzy API service.
+      security: []
+      responses:
+        '200':
+          description: The service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /user:
+    get:
+      operationId: getCurrentUser
+      tags:
+        - User
+      summary: Retrieve the current user
+      description: Returns information about the user that owns the AccessToken.
+      responses:
+        '200':
+          description: The authenticated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /labs:
+    get:
+      operationId: listLabs
+      tags:
+        - Labs
+      summary: List labs
+      description: Lists the labs within an organization.
+      parameters:
+        - name: organization_id
+          in: query
+          description: Filter labs to a specific organization.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of labs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lab'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /labs/{id}:
+    get:
+      operationId: getLab
+      tags:
+        - Labs
+      summary: Retrieve a lab
+      description: Retrieves a single lab by its identifier.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The requested lab.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /types:
+    get:
+      operationId: listTypes
+      tags:
+        - Types
+      summary: List types
+      description: >-
+        Lists and filters the item types defined for a lab. Types classify
+        inventory items and order requests.
+      parameters:
+        - name: lab_id
+          in: query
+          description: Filter types to a specific lab.
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Filter types by name.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of types.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Type'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /inventory-items:
+    get:
+      operationId: listInventoryItems
+      tags:
+        - Inventory Items
+      summary: List inventory items
+      description: Lists and filters inventory items, optionally scoped to a lab.
+      parameters:
+        - name: lab_id
+          in: query
+          description: Filter inventory items to a specific lab.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of inventory items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InventoryItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /inventory-items/{id}:
+    get:
+      operationId: getInventoryItem
+      tags:
+        - Inventory Items
+      summary: Retrieve an inventory item
+      description: Retrieves a single inventory item, including its instances.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The requested inventory item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateInventoryItem
+      deprecated: true
+      tags:
+        - Inventory Items
+      summary: Update an inventory item quantity (deprecated)
+      description: >-
+        Updates the remaining quantity of an inventory item. Deprecated in favor
+        of updating a specific item instance via
+        PUT /inventory-items/{itemId}/instances/{itemInstanceId}.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryItemUpdate'
+      responses:
+        '200':
+          description: The updated inventory item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /inventory-items/{itemId}/instances/{itemInstanceId}:
+    put:
+      operationId: updateInventoryItemInstance
+      tags:
+        - Inventory Items
+      summary: Update an item instance quantity
+      description: >-
+        Updates the remaining quantity of a specific instance of an inventory
+        item as stock is consumed.
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: The identifier of the inventory item.
+          schema:
+            type: string
+        - name: itemInstanceId
+          in: path
+          required: true
+          description: The identifier of the item instance to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemInstanceUpdate'
+      responses:
+        '200':
+          description: The updated item instance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /order-requests:
+    get:
+      operationId: listOrderRequests
+      tags:
+        - Order Requests
+      summary: List order requests
+      description: Lists and filters order requests, optionally scoped to a lab.
+      parameters:
+        - name: lab_id
+          in: query
+          description: Filter order requests to a specific lab.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of order requests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrderRequest
+      tags:
+        - Order Requests
+      summary: Create an order request
+      description: >-
+        Creates a new order request in a lab from an external system such as an
+        ELN or LIMS.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestCreate'
+      responses:
+        '201':
+          description: The created order request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /order-requests/{id}:
+    get:
+      operationId: getOrderRequest
+      tags:
+        - Order Requests
+      summary: Retrieve an order request
+      description: Retrieves a single order request by its identifier.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The requested order request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateOrderRequest
+      tags:
+        - Order Requests
+      summary: Update an order request status
+      description: >-
+        Advances an order request through the Quartzy ordering workflow by
+        updating its status.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestUpdate'
+      responses:
+        '200':
+          description: The updated order request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      tags:
+        - Webhooks
+      summary: List webhooks
+      description: Lists the webhooks registered for an organization.
+      parameters:
+        - name: organization_id
+          in: query
+          description: Filter webhooks to a specific organization.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of webhooks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createWebhook
+      tags:
+        - Webhooks
+      summary: Create a webhook
+      description: >-
+        Registers a webhook that Quartzy calls when a subscribed event occurs on
+        inventory items or order requests.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      responses:
+        '201':
+          description: The created webhook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /webhooks/{id}:
+    get:
+      operationId: getWebhook
+      tags:
+        - Webhooks
+      summary: Retrieve a webhook
+      description: Retrieves a single webhook by its identifier.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The requested webhook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateWebhook
+      tags:
+        - Webhooks
+      summary: Update a webhook
+      description: Updates a webhook, for example to enable or disable it.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdate'
+      responses:
+        '200':
+          description: The updated webhook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: >-
+        Per-user AccessToken generated in Quartzy under Profile > Access Tokens
+        and sent in the Access-Token header.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization for Quartzy API access.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.quartzy.com/oauth/authorize
+          tokenUrl: https://api.quartzy.com/oauth/token
+          scopes: {}
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    IdPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+    Lab:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        organization_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '129.00'
+        currency:
+          type: string
+          example: USD
+    ItemInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        remaining_quantity:
+          type: number
+        lot_number:
+          type: string
+        expiration_date:
+          type: string
+          format: date
+        location:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    ItemInstanceUpdate:
+      type: object
+      required:
+        - remaining_quantity
+      properties:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the instance.
+    InventoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        vendor_name:
+          type: string
+        catalog_number:
+          type: string
+        serial_number:
+          type: string
+        unit_size:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        lab_id:
+          type: string
+          format: uuid
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemInstance'
+        created_at:
+          type: string
+          format: date-time
+    InventoryItemUpdate:
+      type: object
+      properties:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the item.
+    OrderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: string
+          description: The current stage in the Quartzy ordering workflow.
+          enum:
+            - NEW
+            - APPROVED
+            - ORDERED
+            - RECEIVED
+            - BACKORDERED
+        type:
+          $ref: '#/components/schemas/Type'
+        vendor_name:
+          type: string
+        catalog_number:
+          type: string
+        quantity:
+          type: number
+        unit_size:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        lab_id:
+          type: string
+          format: uuid
+        requested_by:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+    OrderRequestCreate:
+      type: object
+      required:
+        - lab_id
+        - name
+      properties:
+        lab_id:
+          type: string
+          format: uuid
+        type_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        vendor_name:
+          type: string
+        catalog_number:
+          type: string
+        quantity:
+          type: number
+        unit_size:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+    OrderRequestUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - NEW
+            - APPROVED
+            - ORDERED
+            - RECEIVED
+            - BACKORDERED
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        organization_id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        event:
+          type: string
+          description: The event that triggers the webhook.
+          example: order_request.updated
+        is_enabled:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    WebhookCreate:
+      type: object
+      required:
+        - url
+        - event
+      properties:
+        organization_id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        event:
+          type: string
+    WebhookUpdate:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        is_enabled:
+          type: boolean
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
