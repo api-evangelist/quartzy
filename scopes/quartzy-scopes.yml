@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/quartzy-openapi.yml
+docs: https://docs.quartzy.com/api/
+note: Quartzy documents per-user AccessToken authentication (Access-Token header)
+  and references OAuth2 in endpoint authorizations, but publishes no OAuth scopes
+  or permission granularity (https://docs.quartzy.com/api/).
+schemes:
+- name: oauth2
+  source: openapi/quartzy-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.quartzy.com/oauth/authorize
+    tokenUrl: https://api.quartzy.com/oauth/token
+  description: OAuth2 authorization for Quartzy API access.
+scopes: []

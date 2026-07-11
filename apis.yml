@@ -146,6 +146,10 @@ apis:
     inventory is consumed and order requests move through the approval and ordering
     workflow.
 common:
+- type: Authentication
+  url: authentication/quartzy-authentication.yml
+- type: OAuthScopes
+  url: scopes/quartzy-scopes.yml
 - type: GitHubOrganization
   url: https://github.com/quartzy
 - type: LinkedIn
