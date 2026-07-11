@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.quartzy.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 12 06:52:43 2026 GMT
+  hsts: true
+  hsts_max_age: 3628800
+- host: docs.quartzy.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jul 31 23:59:59 2026 GMT
+  hsts: false
+- host: api.quartzy.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jul 31 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: quartzy.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
