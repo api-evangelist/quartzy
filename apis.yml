@@ -146,6 +146,8 @@ apis:
     inventory is consumed and order requests move through the approval and ordering
     workflow.
 common:
+- type: AgenticAccess
+  url: agentic-access/quartzy-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/quartzy-vulnerability-disclosure.yml
 - type: DomainSecurity
