@@ -1,0 +1,268 @@
+openapi: 3.0.3
+info:
+  title: Quartzy Public Inventory Items API
+  description: 'The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.
+
+    Base URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.
+
+    Endpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy''s documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.'
+  version: '1.0'
+  contact:
+    name: Quartzy Support
+    url: https://docs.quartzy.com/api/
+    email: support@quartzy.com
+  x-endpointsConfirmed: true
+  x-endpointsModeled: true
+servers:
+- url: https://api.quartzy.com
+  description: Quartzy Public API
+security:
+- accessToken: []
+- oauth2: []
+tags:
+- name: Inventory Items
+  description: Lab inventory items and their physical instances.
+paths:
+  /inventory-items:
+    get:
+      operationId: listInventoryItems
+      tags:
+      - Inventory Items
+      summary: List inventory items
+      description: Lists and filters inventory items, optionally scoped to a lab.
+      parameters:
+      - name: lab_id
+        in: query
+        description: Filter inventory items to a specific lab.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of inventory items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InventoryItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /inventory-items/{id}:
+    get:
+      operationId: getInventoryItem
+      tags:
+      - Inventory Items
+      summary: Retrieve an inventory item
+      description: Retrieves a single inventory item, including its instances.
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The requested inventory item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateInventoryItem
+      deprecated: true
+      tags:
+      - Inventory Items
+      summary: Update an inventory item quantity (deprecated)
+      description: Updates the remaining quantity of an inventory item. Deprecated in favor of updating a specific item instance via PUT /inventory-items/{itemId}/instances/{itemInstanceId}.
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryItemUpdate'
+      responses:
+        '200':
+          description: The updated inventory item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /inventory-items/{itemId}/instances/{itemInstanceId}:
+    put:
+      operationId: updateInventoryItemInstance
+      tags:
+      - Inventory Items
+      summary: Update an item instance quantity
+      description: Updates the remaining quantity of a specific instance of an inventory item as stock is consumed.
+      parameters:
+      - name: itemId
+        in: path
+        required: true
+        description: The identifier of the inventory item.
+        schema:
+          type: string
+      - name: itemInstanceId
+        in: path
+        required: true
+        description: The identifier of the item instance to update.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemInstanceUpdate'
+      responses:
+        '200':
+          description: The updated item instance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    ItemInstanceUpdate:
+      type: object
+      required:
+      - remaining_quantity
+      properties:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the instance.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    InventoryItemUpdate:
+      type: object
+      properties:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the item.
+    InventoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        vendor_name:
+          type: string
+        catalog_number:
+          type: string
+        serial_number:
+          type: string
+        unit_size:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        lab_id:
+          type: string
+          format: uuid
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemInstance'
+        created_at:
+          type: string
+          format: date-time
+    ItemInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        remaining_quantity:
+          type: number
+        lot_number:
+          type: string
+        expiration_date:
+          type: string
+          format: date
+        location:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '129.00'
+        currency:
+          type: string
+          example: USD
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: The page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Per-user AccessToken generated in Quartzy under Profile > Access Tokens and sent in the Access-Token header.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization for Quartzy API access.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.quartzy.com/oauth/authorize
+          tokenUrl: https://api.quartzy.com/oauth/token
+          scopes: {}

@@ -1,0 +1,284 @@
+openapi: 3.0.3
+info:
+  title: Quartzy Public Inventory Items Order Requests API
+  description: 'The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.
+
+    Base URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.
+
+    Endpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy''s documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.'
+  version: '1.0'
+  contact:
+    name: Quartzy Support
+    url: https://docs.quartzy.com/api/
+    email: support@quartzy.com
+  x-endpointsConfirmed: true
+  x-endpointsModeled: true
+servers:
+- url: https://api.quartzy.com
+  description: Quartzy Public API
+security:
+- accessToken: []
+- oauth2: []
+tags:
+- name: Order Requests
+  description: Procurement requests moving through Quartzy's ordering workflow.
+paths:
+  /order-requests:
+    get:
+      operationId: listOrderRequests
+      tags:
+      - Order Requests
+      summary: List order requests
+      description: Lists and filters order requests, optionally scoped to a lab.
+      parameters:
+      - name: lab_id
+        in: query
+        description: Filter order requests to a specific lab.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of order requests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrderRequest
+      tags:
+      - Order Requests
+      summary: Create an order request
+      description: Creates a new order request in a lab from an external system such as an ELN or LIMS.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestCreate'
+      responses:
+        '201':
+          description: The created order request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /order-requests/{id}:
+    get:
+      operationId: getOrderRequest
+      tags:
+      - Order Requests
+      summary: Retrieve an order request
+      description: Retrieves a single order request by its identifier.
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The requested order request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateOrderRequest
+      tags:
+      - Order Requests
+      summary: Update an order request status
+      description: Advances an order request through the Quartzy ordering workflow by updating its status.
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestUpdate'
+      responses:
+        '200':
+          description: The updated order request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+    OrderRequestCreate:
+      type: object
+      required:
+      - lab_id
+      - name
+      properties:
+        lab_id:
+          type: string
+          format: uuid
+        type_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        vendor_name:
+          type: string
+        catalog_number:
+          type: string
+        quantity:
+          type: number
+        unit_size:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    OrderRequestUpdate:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          enum:
+          - NEW
+          - APPROVED
+          - ORDERED
+          - RECEIVED
+          - BACKORDERED
+    OrderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: string
+          description: The current stage in the Quartzy ordering workflow.
+          enum:
+          - NEW
+          - APPROVED
+          - ORDERED
+          - RECEIVED
+          - BACKORDERED
+        type:
+          $ref: '#/components/schemas/Type'
+        vendor_name:
+          type: string
+        catalog_number:
+          type: string
+        quantity:
+          type: number
+        unit_size:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        lab_id:
+          type: string
+          format: uuid
+        requested_by:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '129.00'
+        currency:
+          type: string
+          example: USD
+  responses:
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: The page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Per-user AccessToken generated in Quartzy under Profile > Access Tokens and sent in the Access-Token header.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization for Quartzy API access.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.quartzy.com/oauth/authorize
+          tokenUrl: https://api.quartzy.com/oauth/token
+          scopes: {}

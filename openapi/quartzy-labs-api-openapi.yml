@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Quartzy Public Inventory Items Labs API
+  description: 'The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.
+
+    Base URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.
+
+    Endpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy''s documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.'
+  version: '1.0'
+  contact:
+    name: Quartzy Support
+    url: https://docs.quartzy.com/api/
+    email: support@quartzy.com
+  x-endpointsConfirmed: true
+  x-endpointsModeled: true
+servers:
+- url: https://api.quartzy.com
+  description: Quartzy Public API
+security:
+- accessToken: []
+- oauth2: []
+tags:
+- name: Labs
+  description: Labs within an organization; the scope for inventory and ordering.
+paths:
+  /labs:
+    get:
+      operationId: listLabs
+      tags:
+      - Labs
+      summary: List labs
+      description: Lists the labs within an organization.
+      parameters:
+      - name: organization_id
+        in: query
+        description: Filter labs to a specific organization.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of labs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lab'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /labs/{id}:
+    get:
+      operationId: getLab
+      tags:
+      - Labs
+      summary: Retrieve a lab
+      description: Retrieves a single lab by its identifier.
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The requested lab.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: The page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    Lab:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        organization_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Per-user AccessToken generated in Quartzy under Profile > Access Tokens and sent in the Access-Token header.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization for Quartzy API access.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.quartzy.com/oauth/authorize
+          tokenUrl: https://api.quartzy.com/oauth/token
+          scopes: {}

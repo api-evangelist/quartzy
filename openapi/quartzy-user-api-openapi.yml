@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: Quartzy Public Inventory Items User API
+  description: 'The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.
+
+    Base URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.
+
+    Endpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy''s documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.'
+  version: '1.0'
+  contact:
+    name: Quartzy Support
+    url: https://docs.quartzy.com/api/
+    email: support@quartzy.com
+  x-endpointsConfirmed: true
+  x-endpointsModeled: true
+servers:
+- url: https://api.quartzy.com
+  description: Quartzy Public API
+security:
+- accessToken: []
+- oauth2: []
+tags:
+- name: User
+  description: The authenticated user and service health.
+paths:
+  /healthz:
+    get:
+      operationId: getHealth
+      tags:
+      - User
+      summary: Service health check
+      description: Returns the health status of the Quartzy API service.
+      security: []
+      responses:
+        '200':
+          description: The service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /user:
+    get:
+      operationId: getCurrentUser
+      tags:
+      - User
+      summary: Retrieve the current user
+      description: Returns information about the user that owns the AccessToken.
+      responses:
+        '200':
+          description: The authenticated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  responses:
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Per-user AccessToken generated in Quartzy under Profile > Access Tokens and sent in the Access-Token header.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization for Quartzy API access.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.quartzy.com/oauth/authorize
+          tokenUrl: https://api.quartzy.com/oauth/token
+          scopes: {}
