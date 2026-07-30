@@ -11,7 +11,20 @@ description: Quartzy is a lab management platform for life science teams that co
   homegrown tools - and subscribe to webhooks for inventory and order-request
   events. The API is authenticated with a per-user AccessToken (Access-Token
   header) or OAuth2, and is available to all Quartzy accounts.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/quartzy.png
 tags:
 - Lab Management
 - Inventory Management
@@ -26,125 +39,112 @@ specificationVersion: '0.19'
 apis:
 - aid: quartzy:quartzy-inventory-items-api
   name: Quartzy Inventory Items API
-  tags:
-  - Inventory
-  - Items
-  - Instances
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Lab inventory items and their physical instances.
   humanURL: https://docs.quartzy.com/api/
   baseURL: https://api.quartzy.com
-  properties:
-  - url: https://docs.quartzy.com/api/
-    type: Documentation
-  - url: https://docs.quartzy.com/api/
-    type: APIReference
-  - url: openapi/quartzy-openapi.yml
-    type: OpenAPI
-  - url: collections/quartzy.postman_collection.json
-    type: PostmanCollection
-  - url: collections/quartzy.opencollection.json
-    type: OpenCollection
-  description: List and filter inventory items in a lab, retrieve a single item with
-    its instances, and update the remaining quantity of an item instance. Items carry
-    type, vendor, catalog number, price, and location metadata; each item can have
-    one or more physical instances that are drawn down as the lab consumes stock.
-- aid: quartzy:quartzy-order-requests-api
-  name: Quartzy Order Requests API
   tags:
-  - Order Requests
-  - Ordering
-  - Procurement
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.quartzy.com/api/
-  baseURL: https://api.quartzy.com
+  - Inventory Items
   properties:
-  - url: https://docs.quartzy.com/api/
-    type: Documentation
-  - url: https://docs.quartzy.com/api/
-    type: APIReference
-  - url: openapi/quartzy-openapi.yml
-    type: OpenAPI
-  - url: collections/quartzy.postman_collection.json
-    type: PostmanCollection
-  - url: collections/quartzy.opencollection.json
-    type: OpenCollection
-  description: List and filter order requests for a lab, create new order requests
-    from an external system, retrieve a single request, and advance its status through
-    the Quartzy ordering workflow (new, approved, ordered, received, backordered).
-    This is the primary integration point for pushing procurement out of an ELN or
-    LIMS into Quartzy's ordering and approval flow.
-- aid: quartzy:quartzy-types-api
-  name: Quartzy Types API
-  tags:
-  - Types
-  - Categories
-  - Metadata
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.quartzy.com/api/
-  baseURL: https://api.quartzy.com
-  properties:
-  - url: https://docs.quartzy.com/api/
-    type: Documentation
-  - url: https://docs.quartzy.com/api/
-    type: APIReference
-  - url: openapi/quartzy-openapi.yml
-    type: OpenAPI
-  - url: collections/quartzy.postman_collection.json
-    type: PostmanCollection
-  - url: collections/quartzy.opencollection.json
-    type: OpenCollection
-  description: List and filter the item types (categories such as antibody, chemical,
-    enzyme, or equipment) defined for a lab. Types classify inventory items and order
-    requests and are referenced by their identifier when creating or updating those
-    resources.
+  - type: OpenAPI
+    url: openapi/quartzy-inventory-items-api-openapi.yml
+  - type: Documentation
+    url: https://docs.quartzy.com/api/
+  - type: APIReference
+    url: https://docs.quartzy.com/api/
+  - type: PostmanCollection
+    url: collections/quartzy.postman_collection.json
+  - type: OpenCollection
+    url: collections/quartzy.opencollection.json
 - aid: quartzy:quartzy-labs-api
   name: Quartzy Labs API
-  tags:
-  - Labs
-  - Locations
-  - Organizations
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Labs within an organization; the scope for inventory and ordering.
   humanURL: https://docs.quartzy.com/api/
   baseURL: https://api.quartzy.com
+  tags:
+  - Labs
   properties:
-  - url: https://docs.quartzy.com/api/
-    type: Documentation
-  - url: https://docs.quartzy.com/api/
-    type: APIReference
-  - url: openapi/quartzy-openapi.yml
-    type: OpenAPI
-  - url: collections/quartzy.postman_collection.json
-    type: PostmanCollection
-  - url: collections/quartzy.opencollection.json
-    type: OpenCollection
-  description: List the labs within an organization and retrieve a single lab. A lab
-    is the organizational and location scope that inventory items, order requests,
-    and types belong to; most inventory and ordering calls are filtered by lab_id.
+  - type: OpenAPI
+    url: openapi/quartzy-labs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.quartzy.com/api/
+  - type: APIReference
+    url: https://docs.quartzy.com/api/
+  - type: PostmanCollection
+    url: collections/quartzy.postman_collection.json
+  - type: OpenCollection
+    url: collections/quartzy.opencollection.json
+- aid: quartzy:quartzy-order-requests-api
+  name: Quartzy Order Requests API
+  description: Procurement requests moving through Quartzy's ordering workflow.
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
+  tags:
+  - Order Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/quartzy-order-requests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.quartzy.com/api/
+  - type: APIReference
+    url: https://docs.quartzy.com/api/
+  - type: PostmanCollection
+    url: collections/quartzy.postman_collection.json
+  - type: OpenCollection
+    url: collections/quartzy.opencollection.json
+- aid: quartzy:quartzy-types-api
+  name: Quartzy Types API
+  description: Item type categories used to classify inventory and requests.
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
+  tags:
+  - Types
+  properties:
+  - type: OpenAPI
+    url: openapi/quartzy-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.quartzy.com/api/
+  - type: APIReference
+    url: https://docs.quartzy.com/api/
+  - type: PostmanCollection
+    url: collections/quartzy.postman_collection.json
+  - type: OpenCollection
+    url: collections/quartzy.opencollection.json
+- aid: quartzy:quartzy-user-api
+  name: Quartzy User API
+  description: The authenticated user and service health.
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/quartzy-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.quartzy.com/api/
+  - type: APIReference
+    url: https://docs.quartzy.com/api/
+  - type: PostmanCollection
+    url: collections/quartzy.postman_collection.json
+  - type: OpenCollection
+    url: collections/quartzy.opencollection.json
 - aid: quartzy:quartzy-webhooks-api
   name: Quartzy Webhooks API
+  description: Event subscriptions for inventory and order-request changes.
+  humanURL: https://docs.quartzy.com/api/
+  baseURL: https://api.quartzy.com
   tags:
   - Webhooks
-  - Events
-  - Notifications
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks
-  baseURL: https://api.quartzy.com
   properties:
-  - url: https://docs.quartzy.com/api/
-    type: Documentation
-  - url: https://docs.quartzy.com/api/
-    type: APIReference
-  - url: openapi/quartzy-openapi.yml
-    type: OpenAPI
-  - url: collections/quartzy.postman_collection.json
-    type: PostmanCollection
-  - url: collections/quartzy.opencollection.json
-    type: OpenCollection
-  description: Register, list, retrieve, and enable or disable webhooks that Quartzy
-    calls when inventory items and order requests change. Webhooks let an external
-    system stay in sync with Quartzy without polling, receiving event payloads as
-    inventory is consumed and order requests move through the approval and ordering
-    workflow.
+  - type: OpenAPI
+    url: openapi/quartzy-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.quartzy.com/api/
+  - type: APIReference
+    url: https://docs.quartzy.com/api/
+  - type: PostmanCollection
+    url: collections/quartzy.postman_collection.json
+  - type: OpenCollection
+    url: collections/quartzy.opencollection.json
 common:
 - type: AgenticAccess
   url: agentic-access/quartzy-agentic-access.yml
