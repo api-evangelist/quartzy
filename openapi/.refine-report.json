@@ -1,0 +1,24 @@
+{
+  "provider": "quartzy",
+  "sources": [
+    "quartzy-inventory-items-api-openapi.yml",
+    "quartzy-labs-api-openapi.yml",
+    "quartzy-order-requests-api-openapi.yml",
+    "quartzy-types-api-openapi.yml",
+    "quartzy-user-api-openapi.yml",
+    "quartzy-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "quartzy-inventory-items-api-openapi.yml",
+    "quartzy-labs-api-openapi.yml",
+    "quartzy-order-requests-api-openapi.yml",
+    "quartzy-types-api-openapi.yml",
+    "quartzy-user-api-openapi.yml",
+    "quartzy-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
