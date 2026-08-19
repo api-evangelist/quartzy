@@ -1,0 +1,839 @@
+{
+  "item": [
+    {
+      "id": "e4aa544c-92a8-4425-b631-16ee47306918",
+      "name": "Order Requests",
+      "description": {
+        "content": "Procurement requests moving through Quartzy's ordering workflow.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2448bce6-3d33-4185-bee4-624c69cbcf28",
+          "name": "List order requests",
+          "request": {
+            "name": "List order requests",
+            "description": {
+              "content": "Lists and filters order requests, optionally scoped to a lab.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_id",
+                  "value": "<string>",
+                  "description": "Filter order requests to a specific lab."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39709291-2f73-4e4b-bfd4-0b3ad65fd02a",
+              "name": "A paginated list of order requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"649ceb20-8f51-06ec-b7f4-b6dd4e13e0be\",\n    \"name\": \"string\",\n    \"status\": \"NEW\",\n    \"type\": {\n      \"id\": \"e35ccf42-9e93-a429-b343-0fa2ac855021\",\n      \"name\": \"Antibody\",\n      \"lab_id\": \"c56d3f48-076d-18b6-c317-18e7ffb79cc2\"\n    },\n    \"vendor_name\": \"string\",\n    \"catalog_number\": \"string\",\n    \"quantity\": 4454.832548919671,\n    \"unit_size\": \"string\",\n    \"price\": {\n      \"amount\": \"129.00\",\n      \"currency\": \"USD\"\n    },\n    \"lab_id\": \"00269c5e-9a3e-f462-bd93-2e17dde00f85\",\n    \"requested_by\": {\n      \"id\": \"4e4fc9d6-4321-b1e1-41d6-3ec87402d4f6\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"Ayr9orOKw57xo@gNaoUCtKhAxbFDqDdcmIJhcFm.dym\"\n    },\n    \"created_at\": \"2020-10-21T23:40:26.579Z\"\n  },\n  {\n    \"id\": \"286eca25-6aab-5ce5-c5de-d9420593c7cc\",\n    \"name\": \"string\",\n    \"status\": \"APPROVED\",\n    \"type\": {\n      \"id\": \"51c0f9d1-d794-f827-84fe-995ce186a7ee\",\n      \"name\": \"Antibody\",\n      \"lab_id\": \"59950495-2a03-27c8-211c-3739faa3c9ee\"\n    },\n    \"vendor_name\": \"string\",\n    \"catalog_number\": \"string\",\n    \"quantity\": 9734.490643486035,\n    \"unit_size\": \"string\",\n    \"price\": {\n      \"amount\": \"129.00\",\n      \"currency\": \"USD\"\n    },\n    \"lab_id\": \"ae2fbc66-5728-1b4d-10e1-ce05a1cf6d10\",\n    \"requested_by\": {\n      \"id\": \"ad3d7fca-eac8-3a94-056a-87a67e008a36\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"HiiX3Rx8yzDzTG@baHzRIbxqlQPtVtDnBPoEBLHUpWnNcDOt.fkt\"\n    },\n    \"created_at\": \"1981-07-05T09:25:18.395Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52effa3c-dbea-4bb9-8dff-ddf888e7cff7",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7df85685-05dc-466e-8d7d-9cc579eb0924",
+          "name": "Create an order request",
+          "request": {
+            "name": "Create an order request",
+            "description": {
+              "content": "Creates a new order request in a lab from an external system such as an ELN or LIMS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lab_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"type_id\": \"<uuid>\",\n  \"vendor_name\": \"<string>\",\n  \"catalog_number\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"unit_size\": \"<string>\",\n  \"price\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6073746-6732-4bd9-a0e3-60b44fb87a22",
+              "name": "The created order request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lab_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"type_id\": \"<uuid>\",\n  \"vendor_name\": \"<string>\",\n  \"catalog_number\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"unit_size\": \"<string>\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7e0d6006-48d2-cc83-34a4-69a3c6a64926\",\n  \"name\": \"string\",\n  \"status\": \"NEW\",\n  \"type\": {\n    \"id\": \"4b1d86a6-d956-bbf7-e737-6fbf1d77db52\",\n    \"name\": \"Antibody\",\n    \"lab_id\": \"7a964163-ff3f-574f-84ef-aeaaec3832eb\"\n  },\n  \"vendor_name\": \"string\",\n  \"catalog_number\": \"string\",\n  \"quantity\": 472.4245884074119,\n  \"unit_size\": \"string\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  },\n  \"lab_id\": \"eca85ae8-1fe6-6f3b-e5d8-be70766ee158\",\n  \"requested_by\": {\n    \"id\": \"b2dbe3b0-540f-0997-be27-0739c2b4b5a9\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"u983t4pDjL@bOXepDXnvYCSeccXwrJApjtI.sqgp\"\n  },\n  \"created_at\": \"1965-01-30T16:29:29.937Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6ac38a2-2fd8-45f9-9db7-cbfc89adf04a",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lab_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"type_id\": \"<uuid>\",\n  \"vendor_name\": \"<string>\",\n  \"catalog_number\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"unit_size\": \"<string>\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51bcf595-f6c6-4826-b636-4fd189541efe",
+              "name": "The request body failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lab_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"type_id\": \"<uuid>\",\n  \"vendor_name\": \"<string>\",\n  \"catalog_number\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"unit_size\": \"<string>\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c88bc97-e8c7-48ce-b0fa-ab5295634d68",
+          "name": "Retrieve an order request",
+          "request": {
+            "name": "Retrieve an order request",
+            "description": {
+              "content": "Retrieves a single order request by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order-requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a4d03fd-b500-4aac-a69c-e59b364bb09b",
+              "name": "The requested order request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7e0d6006-48d2-cc83-34a4-69a3c6a64926\",\n  \"name\": \"string\",\n  \"status\": \"NEW\",\n  \"type\": {\n    \"id\": \"4b1d86a6-d956-bbf7-e737-6fbf1d77db52\",\n    \"name\": \"Antibody\",\n    \"lab_id\": \"7a964163-ff3f-574f-84ef-aeaaec3832eb\"\n  },\n  \"vendor_name\": \"string\",\n  \"catalog_number\": \"string\",\n  \"quantity\": 472.4245884074119,\n  \"unit_size\": \"string\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  },\n  \"lab_id\": \"eca85ae8-1fe6-6f3b-e5d8-be70766ee158\",\n  \"requested_by\": {\n    \"id\": \"b2dbe3b0-540f-0997-be27-0739c2b4b5a9\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"u983t4pDjL@bOXepDXnvYCSeccXwrJApjtI.sqgp\"\n  },\n  \"created_at\": \"1965-01-30T16:29:29.937Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6518932-e40b-4746-84c4-e45d2a937e57",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e10fc5f-d37d-4d84-90df-a13208080f8b",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40099f3d-53da-46d3-8211-4fcfdcaacf82",
+          "name": "Update an order request status",
+          "request": {
+            "name": "Update an order request status",
+            "description": {
+              "content": "Advances an order request through the Quartzy ordering workflow by updating its status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order-requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0dd38438-0392-47ce-98d9-dc9fa1b11a91",
+              "name": "The updated order request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7e0d6006-48d2-cc83-34a4-69a3c6a64926\",\n  \"name\": \"string\",\n  \"status\": \"NEW\",\n  \"type\": {\n    \"id\": \"4b1d86a6-d956-bbf7-e737-6fbf1d77db52\",\n    \"name\": \"Antibody\",\n    \"lab_id\": \"7a964163-ff3f-574f-84ef-aeaaec3832eb\"\n  },\n  \"vendor_name\": \"string\",\n  \"catalog_number\": \"string\",\n  \"quantity\": 472.4245884074119,\n  \"unit_size\": \"string\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  },\n  \"lab_id\": \"eca85ae8-1fe6-6f3b-e5d8-be70766ee158\",\n  \"requested_by\": {\n    \"id\": \"b2dbe3b0-540f-0997-be27-0739c2b4b5a9\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"u983t4pDjL@bOXepDXnvYCSeccXwrJApjtI.sqgp\"\n  },\n  \"created_at\": \"1965-01-30T16:29:29.937Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8038ccd-132b-4166-957f-fbbd1a0af79e",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be3cb03a-75d9-4fad-80ac-3bea207724f5",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order-requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quartzy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "29345e2c-ad31-406e-ae68-a04c2182ca09",
+    "name": "Quartzy Public Inventory Items Order Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.\nBase URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.\nEndpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy's documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.\n\nContact Support:\n Name: Quartzy Support\n Email: support@quartzy.com",
+      "type": "text/plain"
+    }
+  }
+}

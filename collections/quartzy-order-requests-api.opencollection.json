@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quartzy Public Inventory Items Order Requests API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List order requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/order-requests",
+            "params": [
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter order requests to a specific lab."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Lists and filters order requests, optionally scoped to a lab."
+        },
+        {
+          "info": {
+            "name": "Create an order request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quartzy.com/order-requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order request in a lab from an external system such as an ELN or LIMS."
+        },
+        {
+          "info": {
+            "name": "Retrieve an order request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/order-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single order request by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update an order request status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.quartzy.com/order-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Advances an order request through the Quartzy ordering workflow by updating its status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

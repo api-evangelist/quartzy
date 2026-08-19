@@ -1,0 +1,215 @@
+{
+  "item": [
+    {
+      "id": "f57130a4-894a-483d-beca-5c4e84526d6b",
+      "name": "Types",
+      "description": {
+        "content": "Item type categories used to classify inventory and requests.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "76703856-4bd4-4e8b-a350-12865b81fd70",
+          "name": "List types",
+          "request": {
+            "name": "List types",
+            "description": {
+              "content": "Lists and filters the item types defined for a lab. Types classify inventory items and order requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_id",
+                  "value": "<string>",
+                  "description": "Filter types to a specific lab."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter types by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32191b52-3030-47fb-857d-76c5d923eb7a",
+              "name": "A paginated list of types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"9d07a2f2-d135-e25f-b0fa-096eaccab3a7\",\n    \"name\": \"Antibody\",\n    \"lab_id\": \"c0f252cf-7795-72d2-bc3b-768469c99245\"\n  },\n  {\n    \"id\": \"e926d71d-0d85-ae33-d412-a1d735504bd2\",\n    \"name\": \"Antibody\",\n    \"lab_id\": \"e00bac38-aa83-795c-9590-94eb5284f9ad\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2d2a33a-c2c9-406c-8b70-b56e4c764734",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quartzy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ee06272f-1363-4631-bc46-77036cb18481",
+    "name": "Quartzy Public Inventory Items Types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.\nBase URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.\nEndpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy's documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.\n\nContact Support:\n Name: Quartzy Support\n Email: support@quartzy.com",
+      "type": "text/plain"
+    }
+  }
+}

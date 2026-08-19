@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quartzy Public Inventory Items User API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Service health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/healthz"
+          },
+          "docs": "Returns the health status of the Quartzy API service."
+        },
+        {
+          "info": {
+            "name": "Retrieve the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/user"
+          },
+          "docs": "Returns information about the user that owns the AccessToken."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

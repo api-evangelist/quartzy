@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quartzy Public Inventory Items Labs API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Labs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List labs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/labs",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter labs to a specific organization."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Lists the labs within an organization."
+        },
+        {
+          "info": {
+            "name": "Retrieve a lab",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/labs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single lab by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

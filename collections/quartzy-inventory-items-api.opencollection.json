@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quartzy Public Inventory Items API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inventory Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List inventory items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/inventory-items",
+            "params": [
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter inventory items to a specific lab."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Lists and filters inventory items, optionally scoped to a lab."
+        },
+        {
+          "info": {
+            "name": "Retrieve an inventory item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/inventory-items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single inventory item, including its instances."
+        },
+        {
+          "info": {
+            "name": "Update an inventory item quantity (deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.quartzy.com/inventory-items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the remaining quantity of an inventory item. Deprecated in favor of updating a specific item instance via PUT /inventory-items/{itemId}/instances/{itemInstanceId}."
+        },
+        {
+          "info": {
+            "name": "Update an item instance quantity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.quartzy.com/inventory-items/:itemId/instances/:itemInstanceId",
+            "params": [
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the inventory item."
+              },
+              {
+                "name": "itemInstanceId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the item instance to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the remaining quantity of a specific instance of an inventory item as stock is consumed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

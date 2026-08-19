@@ -1,0 +1,248 @@
+{
+  "item": [
+    {
+      "id": "2f8dd493-88f6-4c11-8a70-9baaf5c03b63",
+      "name": "User",
+      "description": {
+        "content": "The authenticated user and service health.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c50cbee4-d751-455c-9a5d-390a8a342060",
+          "name": "Service health check",
+          "request": {
+            "name": "Service health check",
+            "description": {
+              "content": "Returns the health status of the Quartzy API service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "healthz"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a226ddd-10cd-44e1-aa6e-40e2ece88296",
+              "name": "The service is healthy.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "healthz"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "402a2640-2fc6-4acf-920b-0bda021d616a",
+          "name": "Retrieve the current user",
+          "request": {
+            "name": "Retrieve the current user",
+            "description": {
+              "content": "Returns information about the user that owns the AccessToken.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9b60019-d0b4-4c07-b9f5-6b9016cb69ca",
+              "name": "The authenticated user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"223b571b-d234-6a84-85f5-a8dc07c7b807\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"email\": \"kTfswD@NQEZNNtKCYfNlkwL.zduz\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be3b7060-c8a3-4117-a9f9-fbc4ec3b77b7",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quartzy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2099cbae-95e3-486b-944c-189587e3e646",
+    "name": "Quartzy Public Inventory Items User API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.\nBase URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.\nEndpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy's documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.\n\nContact Support:\n Name: Quartzy Support\n Email: support@quartzy.com",
+      "type": "text/plain"
+    }
+  }
+}

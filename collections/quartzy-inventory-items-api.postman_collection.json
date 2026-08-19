@@ -1,0 +1,911 @@
+{
+  "item": [
+    {
+      "id": "c00b5111-a694-4058-8006-fea3124aeffe",
+      "name": "Inventory Items",
+      "description": {
+        "content": "Lab inventory items and their physical instances.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55a29357-b218-4d58-a145-a59367f8f3b9",
+          "name": "List inventory items",
+          "request": {
+            "name": "List inventory items",
+            "description": {
+              "content": "Lists and filters inventory items, optionally scoped to a lab.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventory-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_id",
+                  "value": "<string>",
+                  "description": "Filter inventory items to a specific lab."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00ef06d7-cb13-4d53-9e1d-efd26e758e4a",
+              "name": "A paginated list of inventory items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"d6700c14-6d64-30ca-55d6-aff0bd4715f8\",\n    \"name\": \"string\",\n    \"type\": {\n      \"id\": \"f7ab14d6-8f47-e828-0097-43b0a790cc60\",\n      \"name\": \"Antibody\",\n      \"lab_id\": \"c2a5adfd-43f5-1d22-73b8-8e1e8198c389\"\n    },\n    \"vendor_name\": \"string\",\n    \"catalog_number\": \"string\",\n    \"serial_number\": \"string\",\n    \"unit_size\": \"string\",\n    \"price\": {\n      \"amount\": \"129.00\",\n      \"currency\": \"USD\"\n    },\n    \"lab_id\": \"e9f84d3f-e04c-2e3c-cb5b-afe5f3bf9f1d\",\n    \"instances\": [\n      {\n        \"id\": \"7d40933e-87c5-7702-590b-f9196a2209b0\",\n        \"remaining_quantity\": 4299.542627480308,\n        \"lot_number\": \"string\",\n        \"expiration_date\": \"1994-04-24\",\n        \"location\": \"string\",\n        \"created_at\": \"1980-03-31T09:22:39.023Z\"\n      },\n      {\n        \"id\": \"04e13025-7a23-1994-a707-f0a5f28fefdc\",\n        \"remaining_quantity\": 575.8276471021707,\n        \"lot_number\": \"string\",\n        \"expiration_date\": \"1998-10-17\",\n        \"location\": \"string\",\n        \"created_at\": \"2016-04-24T22:03:11.744Z\"\n      }\n    ],\n    \"created_at\": \"1985-08-04T08:21:33.765Z\"\n  },\n  {\n    \"id\": \"185a82c7-0f27-75e0-7629-109f224cfe60\",\n    \"name\": \"string\",\n    \"type\": {\n      \"id\": \"82049487-9a33-3108-769a-0ab5eaebec62\",\n      \"name\": \"Antibody\",\n      \"lab_id\": \"590a3c3b-f3eb-0a25-72f6-242103e96e4c\"\n    },\n    \"vendor_name\": \"string\",\n    \"catalog_number\": \"string\",\n    \"serial_number\": \"string\",\n    \"unit_size\": \"string\",\n    \"price\": {\n      \"amount\": \"129.00\",\n      \"currency\": \"USD\"\n    },\n    \"lab_id\": \"5264b960-c614-d54e-424c-1ee49d53abbf\",\n    \"instances\": [\n      {\n        \"id\": \"b4f3e647-44bb-be60-dada-4d9a2b5fdeff\",\n        \"remaining_quantity\": 3969.692422797261,\n        \"lot_number\": \"string\",\n        \"expiration_date\": \"1958-06-07\",\n        \"location\": \"string\",\n        \"created_at\": \"1952-12-30T21:37:51.220Z\"\n      },\n      {\n        \"id\": \"8e0b1696-783a-6e78-55b7-0bcf433aed8c\",\n        \"remaining_quantity\": 6313.010462918332,\n        \"lot_number\": \"string\",\n        \"expiration_date\": \"2015-10-26\",\n        \"location\": \"string\",\n        \"created_at\": \"1991-01-22T09:27:18.049Z\"\n      }\n    ],\n    \"created_at\": \"1958-03-27T20:39:52.505Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "509e951f-0936-4a7a-a87c-5eb4568acb16",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21d5c1fa-c7f7-4a93-8b02-cdddb197ac72",
+          "name": "Retrieve an inventory item",
+          "request": {
+            "name": "Retrieve an inventory item",
+            "description": {
+              "content": "Retrieves a single inventory item, including its instances.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventory-items",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75e63d6f-8bf0-4155-8604-aca9b571c304",
+              "name": "The requested inventory item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c11c074f-8547-6f92-901d-d57d0a9de0e2\",\n  \"name\": \"string\",\n  \"type\": {\n    \"id\": \"a5a93a8b-a348-5b6b-d31f-16ea164d5842\",\n    \"name\": \"Antibody\",\n    \"lab_id\": \"5ce56583-8127-531c-3fc9-08617a8b2273\"\n  },\n  \"vendor_name\": \"string\",\n  \"catalog_number\": \"string\",\n  \"serial_number\": \"string\",\n  \"unit_size\": \"string\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  },\n  \"lab_id\": \"d4818f73-3352-fcd6-808c-a1440fc0f63f\",\n  \"instances\": [\n    {\n      \"id\": \"da25edac-5956-328e-2ae4-6e02999d48ae\",\n      \"remaining_quantity\": 1932.6292555787627,\n      \"lot_number\": \"string\",\n      \"expiration_date\": \"1968-12-18\",\n      \"location\": \"string\",\n      \"created_at\": \"2002-01-16T21:03:16.957Z\"\n    },\n    {\n      \"id\": \"0b69c97b-4ce5-19a4-1d4c-08dc855e1928\",\n      \"remaining_quantity\": 4438.133655890268,\n      \"lot_number\": \"string\",\n      \"expiration_date\": \"1966-07-02\",\n      \"location\": \"string\",\n      \"created_at\": \"1951-01-25T10:33:04.619Z\"\n    }\n  ],\n  \"created_at\": \"1979-08-22T00:54:05.327Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97859640-d625-4fa1-bad2-21d789c7bbee",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "592d5cbf-5e9b-4639-a99f-d0d7ba76ccf5",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8b55fda-522d-4418-a83f-e11fe94e6700",
+          "name": "Update an inventory item quantity (deprecated)",
+          "request": {
+            "name": "Update an inventory item quantity (deprecated)",
+            "description": {
+              "content": "Updates the remaining quantity of an inventory item. Deprecated in favor of updating a specific item instance via PUT /inventory-items/{itemId}/instances/{itemInstanceId}.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventory-items",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee68db5e-302b-4b56-9513-684e2d5435c8",
+              "name": "The updated inventory item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c11c074f-8547-6f92-901d-d57d0a9de0e2\",\n  \"name\": \"string\",\n  \"type\": {\n    \"id\": \"a5a93a8b-a348-5b6b-d31f-16ea164d5842\",\n    \"name\": \"Antibody\",\n    \"lab_id\": \"5ce56583-8127-531c-3fc9-08617a8b2273\"\n  },\n  \"vendor_name\": \"string\",\n  \"catalog_number\": \"string\",\n  \"serial_number\": \"string\",\n  \"unit_size\": \"string\",\n  \"price\": {\n    \"amount\": \"129.00\",\n    \"currency\": \"USD\"\n  },\n  \"lab_id\": \"d4818f73-3352-fcd6-808c-a1440fc0f63f\",\n  \"instances\": [\n    {\n      \"id\": \"da25edac-5956-328e-2ae4-6e02999d48ae\",\n      \"remaining_quantity\": 1932.6292555787627,\n      \"lot_number\": \"string\",\n      \"expiration_date\": \"1968-12-18\",\n      \"location\": \"string\",\n      \"created_at\": \"2002-01-16T21:03:16.957Z\"\n    },\n    {\n      \"id\": \"0b69c97b-4ce5-19a4-1d4c-08dc855e1928\",\n      \"remaining_quantity\": 4438.133655890268,\n      \"lot_number\": \"string\",\n      \"expiration_date\": \"1966-07-02\",\n      \"location\": \"string\",\n      \"created_at\": \"1951-01-25T10:33:04.619Z\"\n    }\n  ],\n  \"created_at\": \"1979-08-22T00:54:05.327Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6621b47-4019-4e41-841b-9f3b9fd30425",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8b0cb73-758e-4c5d-bc99-ecea6cf18056",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32d6cb5d-0828-43b9-a6c6-91a9a2b2952e",
+          "name": "Update an item instance quantity",
+          "request": {
+            "name": "Update an item instance quantity",
+            "description": {
+              "content": "Updates the remaining quantity of a specific instance of an inventory item as stock is consumed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventory-items",
+                ":itemId",
+                "instances",
+                ":itemInstanceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) The identifier of the inventory item."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemInstanceId",
+                  "description": "(Required) The identifier of the item instance to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "11c06673-c926-43e4-a429-7b59fbc3c6e3",
+              "name": "The updated item instance.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":itemId",
+                    "instances",
+                    ":itemInstanceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The identifier of the inventory item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemInstanceId",
+                      "description": "(Required) The identifier of the item instance to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ea94305d-720b-b88b-39ce-80e7e2fcf349\",\n  \"remaining_quantity\": 6996.51180285898,\n  \"lot_number\": \"string\",\n  \"expiration_date\": \"1980-08-23\",\n  \"location\": \"string\",\n  \"created_at\": \"2006-06-18T11:28:06.131Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5fe2462-a08f-4fac-a859-a8b38a22a266",
+              "name": "The AccessToken is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":itemId",
+                    "instances",
+                    ":itemInstanceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The identifier of the inventory item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemInstanceId",
+                      "description": "(Required) The identifier of the item instance to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ed05761-0e67-4a7a-9448-52a01bb2392e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory-items",
+                    ":itemId",
+                    "instances",
+                    ":itemInstanceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The identifier of the inventory item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemInstanceId",
+                      "description": "(Required) The identifier of the item instance to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remaining_quantity\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quartzy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d450200b-681a-4852-b677-aed8cdeb3099",
+    "name": "Quartzy Public Inventory Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.\nBase URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.\nEndpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy's documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.\n\nContact Support:\n Name: Quartzy Support\n Email: support@quartzy.com",
+      "type": "text/plain"
+    }
+  }
+}

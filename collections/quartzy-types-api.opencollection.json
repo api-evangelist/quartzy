@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quartzy Public Inventory Items Types API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quartzy.com/types",
+            "params": [
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter types to a specific lab."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter types by name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Lists and filters the item types defined for a lab. Types classify inventory items and order requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
