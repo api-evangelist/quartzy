@@ -32,6 +32,14 @@ tags:
 - Procurement
 - Ordering
 - Laboratory
+- Webhook
+tags_raw:
+- Lab Management
+- Inventory Management
+- Life Sciences
+- Procurement
+- Ordering
+- Laboratory
 - Webhooks
 created: '2026-07-04'
 modified: '2026-07-04'
@@ -133,6 +141,8 @@ apis:
   humanURL: https://docs.quartzy.com/api/
   baseURL: https://api.quartzy.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
