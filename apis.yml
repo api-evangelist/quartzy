@@ -11,6 +11,18 @@ description: Quartzy is a lab management platform for life science teams that co
   homegrown tools - and subscribe to webhooks for inventory and order-request
   events. The API is authenticated with a per-user AccessToken (Access-Token
   header) or OAuth2, and is available to all Quartzy accounts.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
