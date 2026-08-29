@@ -168,6 +168,9 @@ apis:
   - type: OpenCollection
     url: collections/quartzy.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/quartzy-capability-edges.yml
+  name: Quartzy Business Capability Map
 - type: AgenticAccess
   url: agentic-access/quartzy-agentic-access.yml
 - type: VulnerabilityDisclosure
