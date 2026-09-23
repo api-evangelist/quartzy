@@ -1,12 +1,7 @@
 {
   "provider": "quartzy",
   "sources": [
-    "quartzy-inventory-items-api-openapi.yml",
-    "quartzy-labs-api-openapi.yml",
-    "quartzy-order-requests-api-openapi.yml",
-    "quartzy-types-api-openapi.yml",
-    "quartzy-user-api-openapi.yml",
-    "quartzy-webhooks-api-openapi.yml"
+    "_original/quartzy-openapi.yml"
   ],
   "outputs": [
     "quartzy-inventory-items-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "quartzy-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "quartzy-inventory-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quartzy-labs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quartzy-order-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quartzy-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quartzy-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "quartzy-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

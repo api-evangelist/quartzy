@@ -1,11 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Quartzy Public Inventory Items Order Requests API
-  description: 'The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.
-
-    Base URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.
-
-    Endpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy''s documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.'
+  title: Quartzy Public Order Requests API
+  description: The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically.
   version: '1.0'
   contact:
     name: Quartzy Support
@@ -118,31 +114,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Type:
+    OrderRequestUpdate:
       type: object
+      required:
+      - status
       properties:
-        id:
+        status:
           type: string
-          format: uuid
-        name:
-          type: string
-          example: Antibody
-        lab_id:
-          type: string
-          format: uuid
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
+          enum:
+          - NEW
+          - APPROVED
+          - ORDERED
+          - RECEIVED
+          - BACKORDERED
     OrderRequestCreate:
       type: object
       required:
@@ -167,26 +151,27 @@ components:
           type: string
         price:
           $ref: '#/components/schemas/Price'
-    Error:
+    Price:
       type: object
       properties:
-        message:
+        amount:
           type: string
-        code:
+          example: '129.00'
+        currency:
           type: string
-    OrderRequestUpdate:
+          example: USD
+    Type:
       type: object
-      required:
-      - status
       properties:
-        status:
+        id:
           type: string
-          enum:
-          - NEW
-          - APPROVED
-          - ORDERED
-          - RECEIVED
-          - BACKORDERED
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
     OrderRequest:
       type: object
       properties:
@@ -224,34 +209,26 @@ components:
         created_at:
           type: string
           format: date-time
-    Price:
+    Error:
       type: object
       properties:
-        amount:
+        message:
           type: string
-          example: '129.00'
-        currency:
+        code:
           type: string
-          example: USD
-  responses:
-    ValidationError:
-      description: The request body failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: The AccessToken is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
   parameters:
     IdPath:
       name: id
@@ -268,6 +245,25 @@ components:
         type: integer
         minimum: 1
         default: 1
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessToken:
       type: apiKey

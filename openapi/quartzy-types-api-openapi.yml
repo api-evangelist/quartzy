@@ -1,11 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Quartzy Public Inventory Items Types API
-  description: 'The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically. With it you can list and update inventory items and their instances, create and advance order requests, read item types and labs, inspect the current user, and register webhooks for inventory and order-request events. The API is generally available to all Quartzy accounts.
-
-    Base URL: https://api.quartzy.com. Requests are authenticated with a per-user AccessToken passed in the `Access-Token` header (generated in Quartzy under Profile > Access Tokens) or via OAuth2. Responses are JSON. List endpoints are paginated with a `page` query parameter.
-
-    Endpoint paths, methods, and query parameters in this document are grounded in the public reference at https://docs.quartzy.com/api/. Request and response object fields are modeled from Quartzy''s documented resources and example payloads; verify exact field names and enumerations against the live reference before relying on them in production.'
+  title: Quartzy Public Types API
+  description: The Quartzy Public API lets life science teams manage lab inventory and ordering programmatically.
   version: '1.0'
   contact:
     name: Quartzy Support
@@ -74,6 +70,13 @@ components:
           type: string
         code:
           type: string
+  responses:
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     Page:
       name: page
@@ -83,13 +86,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-  responses:
-    Unauthorized:
-      description: The AccessToken is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessToken:
       type: apiKey
