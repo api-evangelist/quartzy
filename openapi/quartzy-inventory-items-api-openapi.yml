@@ -129,12 +129,48 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    ItemInstanceUpdate:
+      type: object
+      required:
+      - remaining_quantity
+      properties:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the instance.
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '129.00'
+        currency:
+          type: string
+          example: USD
     InventoryItemUpdate:
       type: object
       properties:
         remaining_quantity:
           type: number
           description: The updated remaining quantity for the item.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
     ItemInstance:
       type: object
       properties:
@@ -153,35 +189,6 @@ components:
         created_at:
           type: string
           format: date-time
-    ItemInstanceUpdate:
-      type: object
-      required:
-      - remaining_quantity
-      properties:
-        remaining_quantity:
-          type: number
-          description: The updated remaining quantity for the instance.
-    Price:
-      type: object
-      properties:
-        amount:
-          type: string
-          example: '129.00'
-        currency:
-          type: string
-          example: USD
-    Type:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-          example: Antibody
-        lab_id:
-          type: string
-          format: uuid
     InventoryItem:
       type: object
       properties:
@@ -212,21 +219,7 @@ components:
         created_at:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: string
   parameters:
-    IdPath:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: string
     Page:
       name: page
       in: query
@@ -235,15 +228,22 @@ components:
         type: integer
         minimum: 1
         default: 1
+    IdPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: The AccessToken is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

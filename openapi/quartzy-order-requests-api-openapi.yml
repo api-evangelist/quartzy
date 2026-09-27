@@ -114,19 +114,40 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    OrderRequestUpdate:
+    Type:
       type: object
-      required:
-      - status
       properties:
-        status:
+        id:
           type: string
-          enum:
-          - NEW
-          - APPROVED
-          - ORDERED
-          - RECEIVED
-          - BACKORDERED
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '129.00'
+        currency:
+          type: string
+          example: USD
     OrderRequestCreate:
       type: object
       required:
@@ -151,27 +172,6 @@ components:
           type: string
         price:
           $ref: '#/components/schemas/Price'
-    Price:
-      type: object
-      properties:
-        amount:
-          type: string
-          example: '129.00'
-        currency:
-          type: string
-          example: USD
-    Type:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-          example: Antibody
-        lab_id:
-          type: string
-          format: uuid
     OrderRequest:
       type: object
       properties:
@@ -216,27 +216,20 @@ components:
           type: string
         code:
           type: string
-    User:
+    OrderRequestUpdate:
       type: object
+      required:
+      - status
       properties:
-        id:
+        status:
           type: string
-          format: uuid
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
+          enum:
+          - NEW
+          - APPROVED
+          - ORDERED
+          - RECEIVED
+          - BACKORDERED
   parameters:
-    IdPath:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: string
     Page:
       name: page
       in: query
@@ -245,9 +238,16 @@ components:
         type: integer
         minimum: 1
         default: 1
+    IdPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: The AccessToken is missing or invalid.
       content:
         application/json:
           schema:
@@ -258,8 +258,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: The AccessToken is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
