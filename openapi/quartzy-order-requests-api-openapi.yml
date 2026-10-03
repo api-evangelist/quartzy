@@ -114,31 +114,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Type:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-          example: Antibody
-        lab_id:
-          type: string
-          format: uuid
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
     Price:
       type: object
       properties:
@@ -172,6 +147,31 @@ components:
           type: string
         price:
           $ref: '#/components/schemas/Price'
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    OrderRequestUpdate:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          enum:
+          - NEW
+          - APPROVED
+          - ORDERED
+          - RECEIVED
+          - BACKORDERED
     OrderRequest:
       type: object
       properties:
@@ -216,19 +216,19 @@ components:
           type: string
         code:
           type: string
-    OrderRequestUpdate:
+    User:
       type: object
-      required:
-      - status
       properties:
-        status:
+        id:
           type: string
-          enum:
-          - NEW
-          - APPROVED
-          - ORDERED
-          - RECEIVED
-          - BACKORDERED
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
   parameters:
     Page:
       name: page
@@ -252,14 +252,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request body failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    ValidationError:
+      description: The request body failed validation.
       content:
         application/json:
           schema:

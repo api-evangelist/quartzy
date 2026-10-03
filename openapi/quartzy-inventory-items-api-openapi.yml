@@ -129,26 +129,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Type:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-          example: Antibody
-        lab_id:
-          type: string
-          format: uuid
-    ItemInstanceUpdate:
-      type: object
-      required:
-      - remaining_quantity
-      properties:
-        remaining_quantity:
-          type: number
-          description: The updated remaining quantity for the instance.
     Price:
       type: object
       properties:
@@ -158,37 +138,6 @@ components:
         currency:
           type: string
           example: USD
-    InventoryItemUpdate:
-      type: object
-      properties:
-        remaining_quantity:
-          type: number
-          description: The updated remaining quantity for the item.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-    ItemInstance:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        remaining_quantity:
-          type: number
-        lot_number:
-          type: string
-        expiration_date:
-          type: string
-          format: date
-        location:
-          type: string
-        created_at:
-          type: string
-          format: date-time
     InventoryItem:
       type: object
       properties:
@@ -219,6 +168,57 @@ components:
         created_at:
           type: string
           format: date-time
+    ItemInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        remaining_quantity:
+          type: number
+        lot_number:
+          type: string
+        expiration_date:
+          type: string
+          format: date
+        location:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    InventoryItemUpdate:
+      type: object
+      properties:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the item.
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    ItemInstanceUpdate:
+      type: object
+      required:
+      - remaining_quantity
+      properties:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the instance.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
   parameters:
     Page:
       name: page
