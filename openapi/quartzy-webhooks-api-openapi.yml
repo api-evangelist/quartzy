@@ -130,6 +130,35 @@ components:
       schema:
         type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    WebhookCreate:
+      type: object
+      required:
+      - url
+      - event
+      properties:
+        organization_id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        event:
+          type: string
+    WebhookUpdate:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        is_enabled:
+          type: boolean
     Webhook:
       type: object
       properties:
@@ -151,35 +180,6 @@ components:
         created_at:
           type: string
           format: date-time
-    WebhookUpdate:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        is_enabled:
-          type: boolean
-    WebhookCreate:
-      type: object
-      required:
-      - url
-      - event
-      properties:
-        organization_id:
-          type: string
-          format: uuid
-        url:
-          type: string
-          format: uri
-        event:
-          type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: string
   responses:
     Unauthorized:
       description: The AccessToken is missing or invalid.
@@ -187,14 +187,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    ValidationError:
+      description: The request body failed validation.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request body failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

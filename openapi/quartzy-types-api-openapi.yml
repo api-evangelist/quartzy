@@ -50,7 +50,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
     Type:
       type: object
       properties:
@@ -63,13 +79,6 @@ components:
         lab_id:
           type: string
           format: uuid
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: string
   responses:
     Unauthorized:
       description: The AccessToken is missing or invalid.
@@ -77,15 +86,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Page:
-      name: page
-      in: query
-      description: The page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     accessToken:
       type: apiKey

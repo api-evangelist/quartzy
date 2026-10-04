@@ -113,52 +113,23 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    IdPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
   schemas:
-    Price:
-      type: object
-      properties:
-        amount:
-          type: string
-          example: '129.00'
-        currency:
-          type: string
-          example: USD
-    OrderRequestCreate:
-      type: object
-      required:
-      - lab_id
-      - name
-      properties:
-        lab_id:
-          type: string
-          format: uuid
-        type_id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        vendor_name:
-          type: string
-        catalog_number:
-          type: string
-        quantity:
-          type: number
-        unit_size:
-          type: string
-        price:
-          $ref: '#/components/schemas/Price'
-    Type:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-          example: Antibody
-        lab_id:
-          type: string
-          format: uuid
     OrderRequestUpdate:
       type: object
       required:
@@ -172,6 +143,13 @@ components:
           - ORDERED
           - RECEIVED
           - BACKORDERED
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
     OrderRequest:
       type: object
       properties:
@@ -209,13 +187,30 @@ components:
         created_at:
           type: string
           format: date-time
-    Error:
+    OrderRequestCreate:
       type: object
+      required:
+      - lab_id
+      - name
       properties:
-        message:
+        lab_id:
           type: string
-        code:
+          format: uuid
+        type_id:
           type: string
+          format: uuid
+        name:
+          type: string
+        vendor_name:
+          type: string
+        catalog_number:
+          type: string
+        quantity:
+          type: number
+        unit_size:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
     User:
       type: object
       properties:
@@ -229,22 +224,27 @@ components:
         email:
           type: string
           format: email
-  parameters:
-    Page:
-      name: page
-      in: query
-      description: The page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    IdPath:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: string
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Antibody
+        lab_id:
+          type: string
+          format: uuid
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: '129.00'
+        currency:
+          type: string
+          example: USD
   responses:
     Unauthorized:
       description: The AccessToken is missing or invalid.
@@ -252,14 +252,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    ValidationError:
+      description: The request body failed validation.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request body failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

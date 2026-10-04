@@ -129,15 +129,37 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Price:
+    InventoryItemUpdate:
       type: object
       properties:
-        amount:
+        remaining_quantity:
+          type: number
+          description: The updated remaining quantity for the item.
+    Error:
+      type: object
+      properties:
+        message:
           type: string
-          example: '129.00'
-        currency:
+        code:
           type: string
-          example: USD
+    ItemInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        remaining_quantity:
+          type: number
+        lot_number:
+          type: string
+        expiration_date:
+          type: string
+          format: date
+        location:
+          type: string
+        created_at:
+          type: string
+          format: date-time
     InventoryItem:
       type: object
       properties:
@@ -168,30 +190,6 @@ components:
         created_at:
           type: string
           format: date-time
-    ItemInstance:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        remaining_quantity:
-          type: number
-        lot_number:
-          type: string
-        expiration_date:
-          type: string
-          format: date
-        location:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-    InventoryItemUpdate:
-      type: object
-      properties:
-        remaining_quantity:
-          type: number
-          description: The updated remaining quantity for the item.
     Type:
       type: object
       properties:
@@ -212,13 +210,15 @@ components:
         remaining_quantity:
           type: number
           description: The updated remaining quantity for the instance.
-    Error:
+    Price:
       type: object
       properties:
-        message:
+        amount:
           type: string
-        code:
+          example: '129.00'
+        currency:
           type: string
+          example: USD
   parameters:
     Page:
       name: page
