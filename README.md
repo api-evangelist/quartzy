@@ -1,4 +1,4 @@
-# Quartzy (quartzy)
+# Quartzy
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,144 +64,135 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Quartzy is a lab management platform for life science teams that combines inventory management, supply ordering, and procurement in one place. Labs track every consumable, reagent, and piece of equipment, submit and approve order requests, and buy from a catalog of millions of lab products. Quartzy exposes a documented public REST API at `api.quartzy.com` so teams can create and update inventory items and order requests from external systems - ELNs, LIMS, and homegrown tools - and subscribe to webhooks for inventory and order-request events. The API is authenticated with a per-user AccessToken (`Access-Token` header) or OAuth2, and is available to all Quartzy accounts.
+Quartzy is a lab management platform for life science teams that combines inventory management, supply ordering, and procurement in one place. Labs track every consumable, reagent, and piece of equipment, submit and approve order requests, and buy from a catalog of millions of lab products. Quartzy exposes a documented public REST API at api.quartzy.com so teams can create and update inventory items and order requests from external systems - ELNs, LIMS, and homegrown tools - and subscribe to webhooks for inventory and order-request events. The API is authenticated with a per-user AccessToken (Access-Token header) or OAuth2, and is available to all Quartzy accounts.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/quartzy/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/quartzy/refs/heads/main/apis.yml)
+**Areas:** Lab Management · Inventory · Life Sciences · Procurement · Ordering · Laboratory · Webhook
 
-## Tags
+## Quartzy on APIs.io
 
-- Lab Management
-- Inventory Management
-- Life Sciences
-- Procurement
-- Ordering
-- Laboratory
-- Webhooks
+Everything profiled for Quartzy is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/quartzy/](https://apis.io/providers/quartzy/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-07-04
-- **Modified:** 2026-07-04
+- [Quartzy Inventory Items API](https://apis.io/apis/quartzy/quartzy-inventory-items-api/) — Lab inventory items and their physical instances.
+- [Quartzy Labs API](https://apis.io/apis/quartzy/quartzy-labs-api/) — Labs within an organization; the scope for inventory and ordering.
+- [Quartzy Order Requests API](https://apis.io/apis/quartzy/quartzy-order-requests-api/) — Procurement requests moving through Quartzy's ordering workflow.
+- [Quartzy Types API](https://apis.io/apis/quartzy/quartzy-types-api/) — Item type categories used to classify inventory and requests.
+- [Quartzy User API](https://apis.io/apis/quartzy/quartzy-user-api/) — The authenticated user and service health.
+- [Quartzy Webhooks API](https://apis.io/apis/quartzy/quartzy-webhooks-api/) — Event subscriptions for inventory and order-request changes.
 
-## APIs
+### Published properties
 
-### Quartzy Inventory Items API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-List and filter inventory items in a lab, retrieve a single item with its instances, and update the remaining quantity of an item instance. Items carry type, vendor, catalog number, price, and location metadata; each item can have one or more physical instances that are drawn down as the lab consumes stock.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.quartzy.com/api/](https://docs.quartzy.com/api/)
-- **Base URL:** `https://api.quartzy.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Quartzy Agentic Access](https://apis.io/agentic-access/quartzy/quartzy-agentic-access/)
 
-- Inventory
-- Items
-- Instances
+#### Collections (7)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.quartzy.com/api/)
-- [API Reference](https://docs.quartzy.com/api/)
-- [OpenAPI](openapi/quartzy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quartzy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quartzy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Quartzy Public API](https://apis.io/collections/quartzy/open-quartzy/)
+- [Quartzy Public Inventory Items API](https://apis.io/collections/quartzy/open-quartzy-inventory-items-api/)
+- [Quartzy Public Inventory Items Labs API](https://apis.io/collections/quartzy/open-quartzy-labs-api/)
+- [Quartzy Public Inventory Items Order Requests API](https://apis.io/collections/quartzy/open-quartzy-order-requests-api/)
+- [Quartzy Public Inventory Items Types API](https://apis.io/collections/quartzy/open-quartzy-types-api/)
+- [Quartzy Public Inventory Items User API](https://apis.io/collections/quartzy/open-quartzy-user-api/)
+- [Quartzy Public Inventory Items Webhooks API](https://apis.io/collections/quartzy/open-quartzy-webhooks-api/)
 
-### Quartzy Order Requests API
+#### Security (3)
 
-List and filter order requests for a lab, create new order requests from an external system, retrieve a single request, and advance its status through the Quartzy ordering workflow (new, approved, ordered, received, backordered). This is the primary integration point for pushing procurement out of an ELN or LIMS into Quartzy's ordering and approval flow.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.quartzy.com/api/](https://docs.quartzy.com/api/)
-- **Base URL:** `https://api.quartzy.com`
+- [Quartzy Authentication](https://apis.io/security/quartzy/quartzy-authentication/)
+- [Quartzy Domain Security](https://apis.io/security/quartzy/quartzy-domain-security/)
+- [Quartzy Vulnerability Disclosure](https://apis.io/security/quartzy/quartzy-vulnerability-disclosure/)
 
-#### Tags
+#### OAuth scopes (1)
 
-- Order Requests
-- Ordering
-- Procurement
+The permissions the API asks for.
 
-#### Properties
+- [Quartzy Scopes](https://apis.io/scopes/quartzy/quartzy-scopes/)
 
-- [Documentation](https://docs.quartzy.com/api/)
-- [API Reference](https://docs.quartzy.com/api/)
-- [OpenAPI](openapi/quartzy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quartzy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quartzy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Quartzy Types API
+Published plans, tiers and prices.
 
-List and filter the item types (categories such as antibody, chemical, enzyme, or equipment) defined for a lab. Types classify inventory items and order requests and are referenced by their identifier when creating or updating those resources.
+- [Quartzy Plans Pricing](https://apis.io/plans/quartzy/quartzy-plans-pricing/)
 
-- **Human URL:** [https://docs.quartzy.com/api/](https://docs.quartzy.com/api/)
-- **Base URL:** `https://api.quartzy.com`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Types
-- Categories
-- Metadata
+- [Quartzy Rate Limits](https://apis.io/rate-limits/quartzy/quartzy-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://docs.quartzy.com/api/)
-- [API Reference](https://docs.quartzy.com/api/)
-- [OpenAPI](openapi/quartzy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quartzy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quartzy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Quartzy Labs API
+- [Quartzy Finops](https://apis.io/finops/quartzy/quartzy-finops/)
 
-List the labs within an organization and retrieve a single lab. A lab is the organizational and location scope that inventory items, order requests, and types belong to; most inventory and ordering calls are filtered by `lab_id`.
+## Where to find this API
 
-- **Human URL:** [https://docs.quartzy.com/api/](https://docs.quartzy.com/api/)
-- **Base URL:** `https://api.quartzy.com`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Labs
-- Locations
-- Organizations
-
-#### Properties
-
-- [Documentation](https://docs.quartzy.com/api/)
-- [API Reference](https://docs.quartzy.com/api/)
-- [OpenAPI](openapi/quartzy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quartzy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quartzy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Quartzy Webhooks API
-
-Register, list, retrieve, and enable or disable webhooks that Quartzy calls when inventory items and order requests change. Webhooks let an external system stay in sync with Quartzy without polling, receiving event payloads as inventory is consumed and order requests move through the approval and ordering workflow.
-
-- **Human URL:** [https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks](https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks)
-- **Base URL:** `https://api.quartzy.com`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [Documentation](https://docs.quartzy.com/api/)
-- [API Reference](https://docs.quartzy.com/api/)
-- [OpenAPI](openapi/quartzy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quartzy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quartzy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/quartzy)
-- [LinkedIn](https://www.linkedin.com/company/quartzy)
 - [Website](https://www.quartzy.com)
 - [Documentation](https://docs.quartzy.com/api/)
-- [Plans](plans/quartzy-plans-pricing.yml)
-- [Rate Limits](rate-limits/quartzy-rate-limits.yml)
-- [Fin Ops](finops/quartzy-finops.yml)
 - [Support](https://support.quartzy.com/hc/en-us/articles/5333106670747-Quartzy-API-and-Webhooks)
+- [GitHub](https://github.com/quartzy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 30.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 48.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 34.5 |
+| Access clarity | 7.9 |
+
+**Agent readiness 22.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.3** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/quartzy/](https://apis.io/providers/quartzy/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Quartzy: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/quartzy/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
